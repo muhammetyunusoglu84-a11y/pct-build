@@ -1,0 +1,18 @@
+name: runner-probe
+on:
+  push:
+    branches: [main]
+    paths: [".github/workflows/probe.yml", "PROBE"]
+  workflow_dispatch:
+jobs:
+  probe:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, macos-26, macos-15, macos-15-intel]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    steps:
+      - run: |
+          uname -a
+          if [ "$(uname)" = "Darwin" ]; then sw_vers; sysctl -n hw.ncpu machdep.cpu.brand_string; xcodebuild -version; fi

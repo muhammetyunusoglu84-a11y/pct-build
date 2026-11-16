@@ -2,6 +2,7 @@ name: build-macos-arm64
 on:
   push:
     branches: [main]
+    paths: ["pct_ba/**", "scripts/**", "tests/**", ".github/workflows/build-macos.yml", "BUILD"]
   workflow_dispatch:
 
 env:
