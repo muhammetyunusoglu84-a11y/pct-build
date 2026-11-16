@@ -11,7 +11,7 @@ env:
 jobs:
   solver:
     name: Bundle adjustment core (Ceres)
-    runs-on: macos-14
+    runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -19,7 +19,7 @@ jobs:
       - uses: actions/cache@v4
         with:
           path: work/prefix
-          key: ceres-2.2.0-eigen-3.4.0-macos14-arm64-v2
+          key: ceres-2.2.0-eigen-3.4.0-macos-arm64-v2
       - name: Build
         run: ./pct_ba/build.sh work out/solver
       - name: Test
@@ -32,7 +32,7 @@ jobs:
 
   pyav:
     name: FFmpeg (LGPL) + PyAV
-    runs-on: macos-14
+    runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -42,7 +42,7 @@ jobs:
       - uses: actions/cache@v4
         with:
           path: ffprefix
-          key: ffmpeg-n9.0.2-lgpl-macos14-arm64-v1
+          key: ffmpeg-n9.0.2-lgpl-macos-arm64-v1
       - name: Build FFmpeg
         run: test -f ffprefix/ffmpeg-build-info.txt || ./scripts/build_ffmpeg.sh work ffprefix
       - name: Build PyAV
@@ -52,7 +52,7 @@ jobs:
 
   opencv:
     name: OpenCV (minimal, no FFmpeg)
-    runs-on: macos-14
+    runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -65,7 +65,7 @@ jobs:
   verify:
     name: Verify (tests + license scan)
     needs: [solver, pyav, opencv]
-    runs-on: macos-14
+    runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
