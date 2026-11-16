@@ -15,7 +15,8 @@ PREFIX="$WORK/prefix"
 COMMON=(-DCMAKE_BUILD_TYPE=Release -DCMAKE_POSITION_INDEPENDENT_CODE=ON -DBUILD_SHARED_LIBS=OFF
         -DCMAKE_INSTALL_PREFIX="$PREFIX" -DCMAKE_PREFIX_PATH="$PREFIX")
 if [ "$(uname)" = "Darwin" ]; then
-  COMMON+=(-DCMAKE_OSX_ARCHITECTURES=arm64 -DCMAKE_OSX_DEPLOYMENT_TARGET="${MACOSX_DEPLOYMENT_TARGET:-14.0}")
+  COMMON+=(-DCMAKE_OSX_ARCHITECTURES=arm64 -DCMAKE_OSX_DEPLOYMENT_TARGET="${MACOSX_DEPLOYMENT_TARGET:-14.0}"
+           -DBLA_VENDOR=Apple "-DCMAKE_IGNORE_PREFIX_PATH=/opt/homebrew;/usr/local;/opt/local")
 fi
 if [ ! -f "$PREFIX/.eigen-$EIGEN_TAG" ] && [ -z "${USE_SYSTEM_EIGEN:-}" ]; then
   [ -d "$WORK/eigen" ] || git clone -q --depth 1 --branch "$EIGEN_TAG" https://gitlab.com/libeigen/eigen.git "$WORK/eigen"

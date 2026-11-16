@@ -5,9 +5,12 @@ import re
 import sys
 import zipfile
 
-BAD = [rb"libx264", rb"libx265", rb"x264 - core", rb"GPL version [23] or later", rb"--enable-gpl",
-       rb"--enable-nonfree", rb"CHOLMOD", rb"SuiteSparse", rb"SPQR", rb"libvidstab", rb"rubberband",
-       rb"xvidcore"]
+# Patterns that only occur when the GPL component is really built in / linked
+# (plain mentions such as Ceres' "SuiteSparse was not enabled" text do not count).
+BAD = [rb"libx26[45][.0-9]*\.dylib", rb"libx26[45]\.so", rb"--enable-libx26[45]", rb"--enable-gpl",
+       rb"--enable-nonfree", rb"GPL version [23] or later", rb"cholmod_l?_(start|analyze|factorize)",
+       rb"SuiteSparseQR", rb"SuiteSparse_(config|version|start)", rb"libvidstab", rb"librubberband",
+       rb"libxvidcore"]
 ALLOW = {rb"GPL version [23] or later": rb"LGPL version [23](\.1)? or later"}
 bad = 0
 
@@ -17,7 +20,7 @@ def scan(name, data):
     for pat in BAD:
         hits = [m for m in re.finditer(pat, data)]
         if pat in ALLOW:  # "LGPL version ..." also matches the GPL pattern
-            hits = [m for m in hits if not re.match(ALLOW[pat], data[max(0, m.start() - 1):m.end() + 4])]
+            hits = [m for m in hits if data[max(0, m.start() - 1):m.start()] != b"L"]
         if hits:
             ctx = data[max(0, hits[0].start() - 30):hits[0].end() + 30]
             print("FOUND %-28s in %s   ...%r..." % (pat.decode(), name, ctx))

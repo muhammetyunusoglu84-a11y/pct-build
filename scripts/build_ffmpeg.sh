@@ -19,7 +19,7 @@ if [ "$(uname)" = "Darwin" ]; then
          --extra-ldflags="-arch arm64 -mmacosx-version-min=$T")
 fi
 ./configure "${ARGS[@]}" > "$WORK/ffmpeg-configure.log" || { tail -30 ffbuild/config.log; exit 1; }
-grep -i "^License" "$WORK/ffmpeg-configure.log"
+grep -i "^License" "$WORK/ffmpeg-configure.log" || true
 # hard guarantees: LGPL, no GPL / nonfree code compiled in
 grep -q '^#define FFMPEG_LICENSE "LGPL version 2.1 or later"' config.h
 grep -q '^#define CONFIG_GPL 0' config.h
