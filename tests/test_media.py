@@ -49,7 +49,7 @@ print("ffmpeg", cfg)
 codecs = av.codecs_available
 for bad in ("libx264", "libx265", "libxvid"):
     assert bad not in codecs, bad + " must not be present"
-for good in ("h264", "hevc", "prores", "prores_ks", "dnxhd", "mpeg2video", "mjpeg", "png"):
+for good in ("h264", "hevc", "prores", "prores_ks", "dnxhd", "mpeg2video", "mjpeg", "png", "exr", "dpx"):
     assert good in codecs, good + " missing"
 tmp = os.path.join(tempfile.mkdtemp(), "t.mov")
 with av.open(tmp, "w") as out:
