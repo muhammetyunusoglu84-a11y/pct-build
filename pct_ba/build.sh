@@ -34,10 +34,11 @@ if [ ! -f "$PREFIX/.ceres-$CERES_TAG-q" ]; then
   grep -i "suitesparse\|accelerate\|lapack\|eigen sparse\|miniglog" "$WORK/ceres-configure.log" || true
   cmake --build "$WORK/ceres-build" -j "$JOBS" > "$WORK/ceres-build.log" 2>&1 || { tail -40 "$WORK/ceres-build.log"; exit 1; }
   cmake --install "$WORK/ceres-build" >/dev/null
+  cp "$WORK/ceres-solver/LICENSE" "$PREFIX/LICENSE-ceres-solver.txt"
   touch "$PREFIX/.ceres-$CERES_TAG-q"
 fi
 cmake -S "$HERE" -B "$WORK/pct_ba-build" "${COMMON[@]}" -DCMAKE_INSTALL_PREFIX="$OUT" >/dev/null
 cmake --build "$WORK/pct_ba-build" -j "$JOBS"
 cmake --install "$WORK/pct_ba-build" >/dev/null
-cp "$WORK/ceres-solver/LICENSE" "$OUT/LICENSE-ceres-solver.txt"
+cp "$PREFIX/LICENSE-ceres-solver.txt" "$OUT/LICENSE-ceres-solver.txt"
 ls -la "$OUT"

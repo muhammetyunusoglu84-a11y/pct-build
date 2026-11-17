@@ -20,7 +20,7 @@ jobs:
       - uses: actions/cache@v4
         with:
           path: work/prefix
-          key: ceres-2.2.0-eigen-3.4.0-macos-arm64-v2
+          key: ceres-2.2.0-eigen-3.4.0-macos-arm64-v3
       - name: Build
         run: ./pct_ba/build.sh work out/solver
       - name: Test
