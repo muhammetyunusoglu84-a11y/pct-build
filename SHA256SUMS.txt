@@ -1,0 +1,7 @@
+211deb1b91408baffb4eaeb18503eaffd389d253501c520aaa893371eee3b483  opencv-macos-arm64/opencv_python_headless-5.0.0.93-cp312-cp312-macosx_14_0_arm64.whl
+246041b6ecf9bc32d718a62c57877c78b5eb397b6467e74ed7ae2626ab189c30  pyav-macos-arm64/FFmpeg-COPYING.LGPLv2.1.txt
+6a24a7e289623cfb04a68cf63dbe8c750665474dae3abd23aeb31212393fb7e1  pyav-macos-arm64/av-19.0.2-cp312-abi3-macosx_14_0_arm64.whl
+b09882972e7366cf064cf96426fc458339bec50e879fcccb3e177edc1182bc0d  pyav-macos-arm64/ffmpeg-build-info.txt
+a119684e689096fa14fd2512e261a00bfb574abb349e98c43f11d847c3eb8a3e  pyav-macos-arm64/ffmpeg-config.h
+765fd9eac4cb827fa5de4304d1f81f4f2c5c332a3f1d6f0f3f7a69a33156729b  solver-macos-arm64/LICENSE-ceres-solver.txt
+53af5a4938209d8beaac1758360b0c0901ef744347165381ac2f1266328f0496  solver-macos-arm64/libpct_ba.dylib

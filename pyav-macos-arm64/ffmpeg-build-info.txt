@@ -1,0 +1,2 @@
+FFmpeg n9.0.2
+configure --prefix=/Users/runner/work/pct-build/pct-build/ffprefix --enable-shared --disable-static --enable-pic --disable-programs --disable-doc --disable-debug --disable-autodetect --enable-zlib --enable-videotoolbox --enable-audiotoolbox --arch=arm64 --cc=clang --extra-cflags=-arch arm64 -mmacosx-version-min=14.0 --extra-ldflags=-arch arm64 -mmacosx-version-min=14.0
