@@ -22,11 +22,12 @@ export CMAKE_ARGS="\
 if [ "$(uname)" = "Darwin" ]; then
   export CMAKE_ARGS="$CMAKE_ARGS -DCMAKE_OSX_ARCHITECTURES=arm64 -DCMAKE_OSX_DEPLOYMENT_TARGET=${MACOSX_DEPLOYMENT_TARGET:-14.0} -DCMAKE_IGNORE_PREFIX_PATH=/opt/homebrew;/usr/local;/opt/local"
   export ARCHFLAGS="-arch arm64"
+  export _PYTHON_HOST_PLATFORM="macosx-${MACOSX_DEPLOYMENT_TARGET:-14.0}-arm64"
 fi
 python -m pip wheel "opencv-python-headless==$VER" --no-binary opencv-python-headless --no-deps -w raw-cv
 if [ "$(uname)" = "Darwin" ]; then
   python -m pip install -q delocate
-  delocate-wheel -v -w "$OUT" raw-cv/opencv_python_headless-*.whl
+  delocate-wheel --require-archs arm64 -w "$OUT" raw-cv/opencv_python_headless-*.whl
 else
   cp raw-cv/opencv_python_headless-*.whl "$OUT/"
 fi
